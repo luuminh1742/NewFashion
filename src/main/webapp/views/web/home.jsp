@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Trang chủ | New Fashion</title>
+<title>Trang chủ</title>
 </head>
 <body>
 <h1>Welcome to New Fashion</h1>

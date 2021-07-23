@@ -43,6 +43,8 @@ public class AbstractDAO<E> implements GenericDAO<E> {
 					statement.setShort(index, (short) para);
 				}else if(para instanceof Byte) {
 					statement.setByte(index, (byte) para);
+				}else if(para instanceof Boolean) {
+					statement.setBoolean(index, (Boolean) para);
 				}
 			}
 		} catch (SQLException e) {
@@ -135,7 +137,7 @@ public class AbstractDAO<E> implements GenericDAO<E> {
 
 
 	@Override
-	public void update(String sql, Object... parameters) {
+	public boolean update(String sql, Object... parameters) {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		try {
@@ -145,14 +147,17 @@ public class AbstractDAO<E> implements GenericDAO<E> {
 			setParameters(statement, parameters);
 			statement.executeUpdate();
 			connection.commit();
+			return true;
 		} catch (SQLException e) {
 			if (connection != null) {
 				try {
 					connection.rollback();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
+					return false;
 				}
 			}
+			return false;
 		} finally {
 			try {
 				if (connection != null)
@@ -161,6 +166,7 @@ public class AbstractDAO<E> implements GenericDAO<E> {
 					statement.close();
 			} catch (SQLException e2) {
 				e2.printStackTrace();
+				return false;
 			}
 		}
 	}

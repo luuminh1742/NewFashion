@@ -12,7 +12,8 @@
 <%-- <!-- FontAwesome Styles-->
 <link href='<c:url value="/assets/admin/css/font-awesome.css"/>'
 	rel="stylesheet" /> --%>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Morris Chart Styles-->
 <link
 	href='<c:url value="/assets/admin/js/morris/morris-0.4.3.min.css"/>'
@@ -25,6 +26,10 @@
 	rel='stylesheet' type='text/css' />
 <link rel="stylesheet"
 	href='<c:url value="/assets/admin/js/Lightweight-Chart/cssCharts.css"/>'>
+<!-- jQuery Js -->
+<script src='<c:url value="/assets/admin/js/jquery-1.10.2.js"/>'></script>
+<script
+	src='<c:url value="/assets/admin/plugins/ckeditor/ckeditor.js"/>'></script>
 </head>
 <body>
 	<div id="wrapper">
@@ -37,8 +42,7 @@
 	</div>
 
 	<!-- JS Scripts-->
-	<!-- jQuery Js -->
-	<script src='<c:url value="/assets/admin/js/jquery-1.10.2.js"/>'></script>
+
 	<!-- Bootstrap Js -->
 	<script src='<c:url value="/assets/admin/js/bootstrap.min.js"/>'></script>
 

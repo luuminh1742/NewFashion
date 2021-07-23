@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
-<c:url var="APIProductCategory" value="/api/product-category/edit"/>
+<c:url var="APIProductCategory" value="/api/product-category/edit" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,11 +29,14 @@
 							<h3>Danh mục sản phẩm</h3>
 							<button class="btn btn-primary btn-lg" data-toggle="modal"
 								data-target="#myModal" onclick="clickAddNewProductCategory()">
-								<i class="fa fa-plus-circle" class="text-light" style="size: 25px"></i>
-								Thêm mới danh mục
+								<i class="fa fa-plus-circle" class="text-light"
+									style="size: 25px"></i> Thêm mới danh mục
 							</button>
+
+
+
 						</div>
-						
+
 					</div>
 					<div class="panel-body">
 						<div class="table-responsive">
@@ -65,12 +68,10 @@
 													onclick="clickDeleteProductCategory(${item.id})">
 													<i class="fa fa-trash-o"></i>
 												</button>
-												
-												<button title="Xem sản phẩm"
-													class="btn btn-info btn-circle">
+												<button title="Xem sản phẩm" class="btn btn-info btn-circle">
 													<i class="fa fa-arrow-right"></i>
 												</button>
-												
+
 											</td>
 										</tr>
 									</c:forEach>
@@ -95,16 +96,15 @@
 						<h4 class="modal-title" id="myModalLabel"></h4>
 					</div>
 					<div class="modal-body">
-						<input id="id-edit" type="hidden"/>
+						<input id="id-edit" type="hidden" />
 						<textarea id="category-name" class="form-control" rows="5" cols=""
 							placeholder="Nhập tên danh mục sản phẩm mới ..."></textarea>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal"
-						>
+						<button type="button" class="btn btn-default" data-dismiss="modal">
 							Hủy</button>
-						<button type="button" class="btn btn-primary" onclick="clickSave()">Lưu thay
-							đổi</button>
+						<button type="button" class="btn btn-primary"
+							onclick="clickSave()">Lưu thay đổi</button>
 					</div>
 				</div>
 			</div>

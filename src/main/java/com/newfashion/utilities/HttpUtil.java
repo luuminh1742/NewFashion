@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class HttpUtil {
+
 	private String value;
 	
 	public HttpUtil(String value) {
@@ -19,8 +20,13 @@ public class HttpUtil {
 		} 
 		return null;
 	}
-	
-	public static HttpUtil of(BufferedReader reader) {// lấy dữ liệu về 
+
+	/**
+	 *
+	 * @param reader
+	 * @return
+	 */
+	public static HttpUtil of(BufferedReader reader) {
 		StringBuilder sb = new StringBuilder();
 		String line ;
 		try {
