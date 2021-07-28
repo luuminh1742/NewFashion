@@ -7,4 +7,5 @@ import lombok.Setter;
 @Setter
 public class ProductCategoryModel extends AbstractModel<ProductCategoryModel>{
 	private String name;
+	private String image;
 }

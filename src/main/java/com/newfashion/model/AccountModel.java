@@ -13,4 +13,5 @@ public class AccountModel extends AbstractModel<AccountModel> {
 	private String email;
 	private boolean status;
 	private Integer roleId;
+	private RoleModel role;
 }

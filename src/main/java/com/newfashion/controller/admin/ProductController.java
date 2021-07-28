@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.newfashion.model.ProductCategoryModel;
 import com.newfashion.model.ProductModel;
+import com.newfashion.paging.PageRequest;
+import com.newfashion.paging.Pageble;
+import com.newfashion.paging.Sorter;
 import com.newfashion.service.IProductCategoryService;
 import com.newfashion.service.IProductService;
 
@@ -33,8 +36,18 @@ public class ProductController extends HttpServlet{
 		String view = "";
 		ProductModel model = new ProductModel();
 		if(type.equals("list")) {
+			int page = Integer.parseInt(req.getParameter("page"));
 			view = "/views/admin/product/list-product.jsp";
-			model.setListResult(productService.findAll());
+			model.setPage(page);
+			model.setMaxPageItem(9);
+			model.setSortBy("desc");
+			model.setSortName("created_date");
+			Pageble pageble = new PageRequest(page, model.getMaxPageItem(),
+					new Sorter(model.getSortName(), model.getSortBy()));
+			model.setTotalItem(productService.getTotalItem());
+			model.setTotalPage((int)Math.ceil((double)model.getTotalItem()/model.getMaxPageItem()));
+			model.setListResult(productService.findAll(pageble));
+
 		}else if(type.equals("edit")) {
 			view = "/views/admin/product/edit-product.jsp";
 			String id = req.getParameter("id");
@@ -45,10 +58,7 @@ public class ProductController extends HttpServlet{
 			productCategoryModel.setListResult(productCategoryService.findAll());
 			req.setAttribute("productCategoryModel", productCategoryModel);
 		}
-		
-		
-		
-		
+
 		req.setAttribute("model", model);
 		req.setAttribute("menuSidebar", "product");
 		RequestDispatcher rd = req.getRequestDispatcher(view);

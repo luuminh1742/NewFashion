@@ -106,6 +106,12 @@
 								
 								
 							</table>
+
+							<form action="<c:url value='/admin/product'/>" id="formSubmit" method="get">
+								<ul class="pagination" id="pagination"></ul>
+								<input type="hidden" value="" id="type" name="type" />
+								<input type="hidden" value="" id="page" name="page">
+							</form>
 						</div>
 					</div>
 				</div>
@@ -116,6 +122,25 @@
 		<%@include file="/common/admin/footer.jsp"%>
 	</div>
 <script type="text/javascript">
+
+
+	var totalPages = ${ model.totalPage };
+	var currentPage = ${ model.page };
+	$(function () {
+		window.pagObj = $('#pagination').twbsPagination({
+			totalPages: totalPages,
+			visiblePages: 5,
+			startPage: currentPage,
+			onPageClick: function (event, page) {
+				if (currentPage != page) {
+					$('#type').val('list');
+					$('#page').val(page);
+					$('#formSubmit').submit();
+				}
+			}
+		});
+	});
+
 
 function clickDeleteProduct(id){
 	var confirmDelete = confirm("Xác nhận xóa sản phẩm này?");

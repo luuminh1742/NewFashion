@@ -38,7 +38,7 @@
                     <div style="display: flex;justify-content: space-between;">
                         <div style="display: flex;">
                             <a style="padding: 8px 10px;" title="Trở lại"
-                               href='<c:url value="/admin/product?type=list"/>'>
+                               href='<c:url value="/admin/product?type=list&page=1"/>'>
                                 <i class="fa fa-long-arrow-left" style="font-size: 25px"></i>
                             </a>
                             <c:choose>

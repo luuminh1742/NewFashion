@@ -13,6 +13,7 @@ public class ProductCategoryMapper implements RowMapper<ProductCategoryModel> {
 		try {
 			model.setId(resultSet.getInt("id"));
 			model.setName(resultSet.getString("name"));
+			model.setImage(resultSet.getString("image"));
 			return model;
 		} catch (SQLException e) {
 			e.printStackTrace();

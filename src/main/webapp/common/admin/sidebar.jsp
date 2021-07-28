@@ -13,7 +13,7 @@
                 <a class='${menuSidebar == "product-category" ?"active-menu":""}' href='<c:url value = "/admin/product-category"/>'><i class="fa fa-leanpub"></i> Quản lý danh mục</a>
             </li>
             <li>
-                <a class='${menuSidebar == "product" ?"active-menu":""}' href='<c:url value = "/admin/product?type=list"/>'><i class="fa fa-snowflake-o"></i> Quản lý Sản phẩm</a>
+                <a class='${menuSidebar == "product" ?"active-menu":""}' href='<c:url value = "/admin/product?type=list&page=1"/>'><i class="fa fa-snowflake-o"></i> Quản lý Sản phẩm</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-money"></i> Quản lý hóa đơn</a>

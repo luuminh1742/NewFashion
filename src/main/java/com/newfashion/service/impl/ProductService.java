@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import com.newfashion.dao.IProductDAO;
 import com.newfashion.model.ProductImageModel;
 import com.newfashion.model.ProductModel;
+import com.newfashion.paging.Pageble;
 import com.newfashion.service.IProductImageService;
 import com.newfashion.service.IProductService;
 
@@ -20,14 +21,25 @@ public class ProductService implements IProductService{
 	@Override
 	public List<ProductModel> findAll() {
 		List<ProductModel> result = productDAO.findAll();
-		
 		result.forEach(product ->{
 			List<ProductImageModel> productImages = productImageService.findAllByProductId(product.getId());
 			if(productImages.size()>0) {
 				String image = productImages.get(0).getName();
 				product.setImage(image);
 			}
-			
+		});
+		return result;
+	}
+
+	@Override
+	public List<ProductModel> findAll(Pageble pageble) {
+		List<ProductModel> result = productDAO.findAll(pageble);
+		result.forEach(product ->{
+			List<ProductImageModel> productImages = productImageService.findAllByProductId(product.getId());
+			if(productImages.size()>0) {
+				String image = productImages.get(0).getName();
+				product.setImage(image);
+			}
 		});
 		return result;
 	}
@@ -56,6 +68,11 @@ public class ProductService implements IProductService{
 	public boolean delete(Integer id) {
 		productImageService.deleteByProductId(id);
 		return productDAO.delete(id);
+	}
+
+	@Override
+	public int getTotalItem() {
+		return productDAO.getTotalItem();
 	}
 
 }

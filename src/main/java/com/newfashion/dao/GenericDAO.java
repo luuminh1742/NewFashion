@@ -9,4 +9,5 @@ public interface GenericDAO<E> {
 	Integer insert(String sql,Object...parameters);
 	boolean update(String sql,Object...parameters);
 	E findById(String sql,RowMapper<E> rowMapper,Object...parameters);
+	int count(String sql, Object... parameters);
 }

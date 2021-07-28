@@ -28,8 +28,12 @@
 	href='<c:url value="/assets/admin/js/Lightweight-Chart/cssCharts.css"/>'>
 <!-- jQuery Js -->
 <script src='<c:url value="/assets/admin/js/jquery-1.10.2.js"/>'></script>
+	<!-- Bootstrap Js -->
+	<script src='<c:url value="/assets/admin/js/bootstrap.min.js"/>'></script>
 <script
 	src='<c:url value="/assets/admin/plugins/ckeditor/ckeditor.js"/>'></script>
+	<!--  phân trang  -->
+	<script src="<c:url value='/assets/paging/jquery.twbsPagination.js'/>"></script>
 </head>
 <body>
 	<div id="wrapper">
@@ -43,8 +47,7 @@
 
 	<!-- JS Scripts-->
 
-	<!-- Bootstrap Js -->
-	<script src='<c:url value="/assets/admin/js/bootstrap.min.js"/>'></script>
+
 
 	<!-- Metis Menu Js -->
 	<script src='<c:url value="/assets/admin/js/jquery.metisMenu.js"/>'></script>
@@ -65,10 +68,10 @@
 
 
 	<!-- Chart Js -->
-	<script type="text/javascript"
+<%--	<script type="text/javascript"
 		src='<c:url value="/assets/admin/js/Chart.min.js"/>'></script>
 	<script type="text/javascript"
-		src='<c:url value="/assets/admin/js/chartjs.js"/>'></script>
+		src='<c:url value="/assets/admin/js/chartjs.js"/>'></script>--%>
 
 </body>
 </html>
