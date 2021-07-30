@@ -17,6 +17,7 @@ public class AccountMapper implements RowMapper{
             model.setFullName(resultSet.getString("full_name"));
             model.setAddress(resultSet.getString("address"));
             model.setEmail(resultSet.getString("email"));
+            model.setPhone(resultSet.getString("phone"));
             model.setStatus(resultSet.getBoolean("status"));
             model.setRoleId(resultSet.getInt("role_id"));
             try {

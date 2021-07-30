@@ -28,6 +28,7 @@ public class ShopController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         int page = Integer.parseInt(req.getParameter("page"));
+        int categoryId =  Integer.parseInt(req.getParameter("category-id"));
         ProductModel productModel = new ProductModel();
         productModel.setPage(page);
         productModel.setMaxPageItem(10);
@@ -35,10 +36,17 @@ public class ShopController extends HttpServlet {
         productModel.setSortName("created_date");
         Pageble pageble = new PageRequest(page, productModel.getMaxPageItem(),
                 new Sorter(productModel.getSortName(), productModel.getSortBy()));
-        productModel.setTotalItem(productService.getTotalItem());
-        productModel.setTotalPage((int)Math.ceil((double)productModel.getTotalItem()/productModel.getMaxPageItem()));
-        productModel.setListResult(productService.findAll(pageble));
+        if(categoryId!=0){
+            productModel.setTotalItem(productService.getTotalItem(categoryId));
+            productModel.setTotalPage((int)Math.ceil((double)productModel.getTotalItem()/productModel.getMaxPageItem()));
+            productModel.setListResult(productService.findAll(pageble,categoryId));
+        }else{
+            productModel.setTotalItem(productService.getTotalItem());
+            productModel.setTotalPage((int)Math.ceil((double)productModel.getTotalItem()/productModel.getMaxPageItem()));
+            productModel.setListResult(productService.findAll(pageble));
+        }
 
+        req.setAttribute("categoryId",categoryId);
         req.setAttribute("productModel",productModel);
         RequestDispatcher rd = req.getRequestDispatcher("/views/web/shop.jsp");
         genericController.displayGeneric(req,"SHOP");

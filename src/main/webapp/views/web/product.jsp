@@ -1,6 +1,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglib.jsp"%>
+<c:url var="APICart" value="/api/cart"/>
 <html>
 <head>
     <title>${productModel.name}</title>
@@ -62,10 +63,12 @@
                                 <i class="fa fa-star-o"></i>
                                 <span>(5)</span>
                             </div>
-                            <div class="pd-desc">
-                                <%--<p></p>--%>
-                                <h4>${productModel.price} VND <%--<span>629.99</span>--%></h4>
+                            <div style="padding:20px 0px">
+                                <h4 style="color: #e7ab3c; font-weight: 700;"><span class="money">${productModel.price}</span> VND</h4>
                             </div>
+                            <%--<div class="pd-desc">
+                                <h4><p class="money"></p> VND</h4>
+                            </div>--%>
 
                             <div class="pd-size-choose">
                                 <h6>Size</h6>
@@ -88,9 +91,47 @@
                             </div>
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input type="text" value="1">
+                                    <input id="quantity" type="text" value="1">
                                 </div>
-                                <a href="#" class="primary-btn pd-cart">Add To Cart</a>
+                                <c:if test="${not empty USERMODEL}">
+                                    <a href="" class="primary-btn pd-cart" onclick="clickAddCart(${productModel.id},${USERMODEL.id})">Add To Cart</a>
+                                    <script>
+                                        const clickAddCart = (product_id,account_id)=>{
+                                            let data = {};
+                                            data["productId"] = product_id;
+                                            data["accountId"] = account_id;
+                                            data["quantity"] = Number($('#quantity').val());
+                                            if(data["quantity"]<=0){
+                                                alert("Invalid product quantity!");
+                                                return;
+                                            }
+                                            $.ajax({
+                                                url: '${APICart}',
+                                                type: 'POST',
+                                                contentType: 'application/json',
+                                                data: JSON.stringify(data),
+                                                dataType: 'json',
+                                                success: function (result) {
+                                                    alert("Added to cart");
+                                                },
+                                                error: function (error) {
+                                                    alert("Add to cart failure");
+                                                }
+                                            });
+                                        }
+
+                                    </script>
+                                </c:if>
+                                <c:if test="${empty USERMODEL}">
+                                    <a href="" class="primary-btn pd-cart" onclick="clickAddCart()">Add To Cart</a>
+                                    <script>
+                                        const clickAddCart = ()=>{
+                                            alert('You are not logged in!');
+                                        }
+
+                                    </script>
+                                </c:if>
+
                             </div>
                             <ul class="pd-tags">
                                 <li><span>CATEGORIES</span>: More Accessories, Wallets & Cases</li>

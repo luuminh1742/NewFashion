@@ -75,4 +75,22 @@ public class ProductService implements IProductService{
 		return productDAO.getTotalItem();
 	}
 
+	@Override
+	public int getTotalItem(Integer categoryId) {
+		return productDAO.getTotalItem(categoryId);
+	}
+
+	@Override
+	public List<ProductModel> findAll(Pageble pageble, Integer categoryId) {
+		List<ProductModel> result = productDAO.findAll(pageble,categoryId);
+		result.forEach(product ->{
+			List<ProductImageModel> productImages = productImageService.findAllByProductId(product.getId());
+			if(productImages.size()>0) {
+				String image = productImages.get(0).getName();
+				product.setImage(image);
+			}
+		});
+		return result;
+	}
+
 }

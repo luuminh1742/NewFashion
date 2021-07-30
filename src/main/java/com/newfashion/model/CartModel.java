@@ -9,4 +9,7 @@ public class CartModel extends AbstractModel<CartModel>{
 	private Integer productId;
 	private Integer accountId;
 	private short quantity;
+	//-------------------------------------
+	private ProductModel product;
+	private int totalMoney;
 }

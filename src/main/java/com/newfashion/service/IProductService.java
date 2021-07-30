@@ -12,4 +12,6 @@ public interface IProductService {
 	ProductModel save(ProductModel model);
 	boolean delete(Integer id);
 	int getTotalItem();
+	int getTotalItem(Integer categoryId);
+	List<ProductModel> findAll(Pageble pageble,Integer categoryId);
 }

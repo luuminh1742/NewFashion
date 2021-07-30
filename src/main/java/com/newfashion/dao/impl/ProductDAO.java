@@ -71,6 +71,24 @@ public class ProductDAO extends AbstractDAO<ProductModel> implements IProductDAO
 	}
 
 	@Override
+	public int getTotalItem(Integer categoryId) {
+		String sql = "select count(*) from product where category_id = ?";
+		return count(sql,categoryId);
+	}
+
+	@Override
+	public List<ProductModel> findAll(Pageble pageble, Integer categoryId) {
+		StringBuilder  sql = new StringBuilder("select * from product where category_id = ? ");
+		if (pageble.getSorter() != null && StringUtils.isNotBlank(pageble.getSorter().getSortName()) && StringUtils.isNotBlank(pageble.getSorter().getSortBy())) {
+			sql.append(" ORDER BY "+pageble.getSorter().getSortName()+" "+pageble.getSorter().getSortBy()+"");
+		}
+		if (pageble.getOffset() != null && pageble.getLimit() != null) {
+			sql.append(" LIMIT "+pageble.getOffset()+", "+pageble.getLimit()+"");
+		}
+		return query(sql.toString(), new ProductMapper(),categoryId);
+	}
+
+	@Override
 	public void saveTimeChange(Timestamp modifiedDate, String modifiedBy,int id) {
 		String sql = "update product set modified_date = ?, modified_by = ? where id = ?";
 		update(sql,modifiedDate,modifiedBy,id);

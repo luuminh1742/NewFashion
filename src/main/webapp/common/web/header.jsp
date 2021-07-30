@@ -65,9 +65,9 @@
                         <li class="cart-icon">
 
                             <c:if test="${not empty USERMODEL}">
-                                <a href="#">
+                                <a href='<c:url value="/cart"/> '>
                                     <i class="fa fa-cart-plus"></i>
-                                    <span>3</span>
+                                    <span>${countProductsInCart}</span>
                                 </a>
                             </c:if>
                             <c:if test="${empty USERMODEL}">
@@ -96,7 +96,7 @@
                     <span>All Categories</span>
                     <ul class="depart-hover">
                         <c:forEach var="category" items="${productCategoryModel.listResult}">
-                            <li><a href="#">${category.name}</a></li>
+                            <li><a href='<c:url value="/shop?category-id=${category.id}&page=1"/>'>${category.name}</a></li>
                         </c:forEach>
                     </ul>
                 </div>
@@ -104,8 +104,8 @@
             <nav class="nav-menu mobile-menu">
                 <ul>
                     <li class="${checkMenuHeader == "HOME"?"active":""}"><a href='<c:url value="/home"/>'>Home</a></li>
-                    <li class="${checkMenuHeader == "SHOP"?"active":""}"><a
-                            href='<c:url value="/shop?page=1"/>'>Shop</a></li>
+                    <li class="${checkMenuHeader == "SHOP"?"active":""}">
+                        <a href='<c:url value="/shop?category-id=0&page=1"/>'>Shop</a></li>
                     <li><a href="#">Contact</a></li>
                     <li><a href="#">consultants</a></li>
                 </ul>

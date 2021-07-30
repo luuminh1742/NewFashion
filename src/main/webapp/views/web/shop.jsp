@@ -1,6 +1,6 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="/common/taglib.jsp"%>
+<%@include file="/common/taglib.jsp" %>
+<c:url var="APICart" value="/api/cart"/>
 <html>
 <head>
     <title>Shop</title>
@@ -13,7 +13,22 @@
             <div class="col-lg-12">
                 <div class="breadcrumb-text">
                     <a href='<c:url value="/home"/> '><i class="fa fa-home"></i> Home</a>
-                    <span>Shop</span>
+                    <c:choose>
+                        <c:when test="${categoryId == 0}">
+                            <span>Shop</span>
+                        </c:when>
+                        <c:otherwise>
+                            <c:forEach var="category" items="${productCategoryModel.listResult}">
+                                <c:if test="${category.id == categoryId}">
+                                    <a href='<c:url value="/shop?category-id=0&page=1"/> '> Shop</a>
+                                    <span>
+                                            ${category.name}
+                                    </span>
+                                </c:if>
+                            </c:forEach>
+                        </c:otherwise>
+                    </c:choose>
+
                 </div>
             </div>
         </div>
@@ -30,7 +45,12 @@
                     <h4 class="fw-title">Categories</h4>
                     <ul class="filter-catagories">
                         <c:forEach var="category" items="${productCategoryModel.listResult}">
-                            <li><a href="#">${category.name}</a></li>
+                            <li>
+                                <a class="category-name <c:if test="${categoryId != 0 && categoryId == category.id}">active-category</c:if>"
+                                   href='<c:url value="/shop?category-id=${category.id}&page=1"/> '>
+                                        ${category.name}
+                                </a>
+                            </li>
                         </c:forEach>
                     </ul>
                 </div>
@@ -166,39 +186,78 @@
                 <div class="product-list">
                     <div class="row">
                         <c:forEach var="product" items="${productModel.listResult}">
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
+                            <div class="col-lg-4 col-sm-6 mb-4">
+                                <div class="product-item border border-light p-2 h-100">
                                     <div class="pi-pic">
-                                        <img src='<c:url value="/fileupload/images/${product.image}"/>' height="280" alt="">
+                                        <img src='<c:url value="/fileupload/images/${product.image}"/>' height="280"
+                                             alt="">
                                         <div class="sale pp-sale">Sale</div>
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
                                         </div>
                                         <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                            <c:if test="${not empty USERMODEL}">
+                                                <li class="w-icon active"><a
+                                                        onclick="clickAddCart(${product.id},${USERMODEL.id})"><i
+                                                        class="fa fa-cart-plus"></i></a></li>
+                                                <script>
+                                                    const clickAddCart = (product_id, account_id) => {
+                                                        let data = {};
+                                                        data["productId"] = product_id;
+                                                        data["accountId"] = account_id;
+                                                        data["quantity"] = 1;
+                                                        $.ajax({
+                                                            url: '${APICart}',
+                                                            type: 'POST',
+                                                            contentType: 'application/json',
+                                                            data: JSON.stringify(data),
+                                                            dataType: 'json',
+                                                            success: function (result) {
+                                                                alert("Added to cart");
+                                                            },
+                                                            error: function (error) {
+                                                                alert("Add to cart failure");
+                                                            }
+                                                        });
+                                                    }
+
+                                                </script>
+                                            </c:if>
+                                            <c:if test="${empty USERMODEL}">
+                                                <li class="w-icon active"><a href="" onclick="clickAddCart()"><i
+                                                        class="fa fa-cart-plus"></i></a></li>
+                                                <script>
+                                                    const clickAddCart = () => {
+                                                        alert('You are not logged in!');
+                                                    }
+
+                                                </script>
+                                            </c:if>
                                             <li class="quick-view"><a href="#">+ Quick View</a></li>
                                             <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
                                         </ul>
                                     </div>
                                     <div class="pi-text">
-                                        <%--<div class="catagory-name">Towel</div>--%>
-                                        <a href='<c:url value="/product?id=${product.id}"/>'>
-                                            <h5>${product.name}</h5>
+                                            <%--<div class="catagory-name">Towel</div>--%>
+                                        <a class="pb-3" href='<c:url value="/product?id=${product.id}"/>'>
+                                            <h5 class="product-name">${product.name}</h5>
                                         </a>
-                                        <div class="product-price">
-                                            ${product.price} VNĐ
-                                            <%--<span>$35.00</span>--%>
+                                        <div style="color: #e7ab3c;font-size: 20px;font-weight: 700;width: 100%;position: absolute;bottom: 0px;left: 0px">
+                                            <span class="money">${product.price}</span> VNĐ
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </c:forEach>
-                        <form action="<c:url value='/shop'/>" id="formSubmit" method="get" style="margin: 25px auto;">
-                            <ul class="pagination" id="pagination"></ul>
-                            <input type="hidden" value="" id="page" name="page">
-                        </form>
+
                     </div>
+
                 </div>
+                <form action="<c:url value='/shop'/>" id="formSubmit" method="get" style="margin: 25px auto;display: flex;justify-content: center;">
+                    <ul class="pagination" id="pagination"></ul>
+                    <input type="hidden" value="${categoryId}" id="category-id" name="category-id">
+                    <input type="hidden" value="" id="page" name="page">
+                </form>
 
             </div>
         </div>
@@ -206,10 +265,10 @@
 </section>
 <!-- Product Shop Section End -->
 
-
 <script>
-    var totalPages = ${ productModel.totalPage };
-    var currentPage = ${ productModel.page };
+    let totalPages = ${ productModel.totalPage };
+    let currentPage = ${ productModel.page };
+    let categoryId = $('#category-id').val();
     $(function () {
         window.pagObj = $('#pagination').twbsPagination({
             totalPages: totalPages,
@@ -217,12 +276,14 @@
             startPage: currentPage,
             onPageClick: function (event, page) {
                 if (currentPage != page) {
+                    $('#category-id').val(categoryId);
                     $('#page').val(page);
                     $('#formSubmit').submit();
                 }
             }
         });
     });
+
 </script>
 </body>
 </html>

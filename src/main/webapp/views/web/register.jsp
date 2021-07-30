@@ -29,16 +29,20 @@
                     <h2>Register</h2>
                     <form action="#">
                         <div class="group-input">
-                            <label for="username">Username or email address *</label>
-                            <input type="text" id="username">
+                            <label for="email">Email *</label>
+                            <input type="text" id="email" placeholder="Email">
+                        </div>
+                        <div class="group-input">
+                            <label for="username">Username *</label>
+                            <input type="text" id="username" placeholder="Username">
                         </div>
                         <div class="group-input">
                             <label for="pass">Password *</label>
-                            <input type="password" id="pass">
+                            <input type="password" id="pass" placeholder="Password">
                         </div>
                         <div class="group-input">
                             <label for="con-pass">Confirm Password *</label>
-                            <input type="password" id="con-pass">
+                            <input type="password" id="con-pass" placeholder="Confirm Password">
                         </div>
                         <button type="submit" class="site-btn register-btn">REGISTER</button>
                     </form>

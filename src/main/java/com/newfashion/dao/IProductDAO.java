@@ -14,4 +14,6 @@ public interface IProductDAO extends GenericDAO<ProductModel>{
 	void saveTimeChange(Timestamp modifiedDate,String modifiedBy,int id);
 	boolean delete(Integer id);
 	int getTotalItem();
+	int getTotalItem(Integer categoryId);
+	List<ProductModel> findAll(Pageble pageble,Integer categoryId);
 }

@@ -24,3 +24,15 @@
 .dropdown-content a:hover {background-color: #ddd;}
 
 .dropdown:hover .dropdown-content {display: block;}
+
+.product-name:hover{
+    color: #e7ab3c !important;
+}
+
+.category-name:hover{
+    color: #e7ab3c !important;
+}
+
+.active-category{
+    color: #e7ab3c !important;
+}
