@@ -13,8 +13,10 @@ public class BillModel extends AbstractModel<BillModel> {
 	private String receiverAddress;
 	private String receiverPhone;
 	private Timestamp createdDate;
+	private String date;
 	private String payType;
 	private boolean status;
 	private Integer accountId;
 	private List<CartModel> carts;
+	private List<BillDetailModel> billDetails;
 }

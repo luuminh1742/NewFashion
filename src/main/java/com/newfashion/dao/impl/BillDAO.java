@@ -15,6 +15,14 @@ public class BillDAO extends AbstractDAO<BillModel> implements IBillDAO {
     }
 
     @Override
+    public List<BillModel> findAllByAccountId(Integer accountId) {
+        String sql = "select * from bill where account_id = ? order by created_date desc";
+        return query(sql,new BillMapper(),accountId);
+    }
+
+
+
+    @Override
     public List<BillModel> findAll() {
         String sql = "select * from bill";
         return query(sql,new BillMapper());

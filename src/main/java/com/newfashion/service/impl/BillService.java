@@ -25,7 +25,9 @@ public class BillService implements IBillService {
 
     @Override
     public BillModel findById(Integer id) {
-        return billDAO.findById(id);
+        BillModel result = billDAO.findById(id);
+        result.setBillDetails(billDetailDAO.findAllByBillId(id));
+        return result;
     }
 
     @Override
@@ -55,5 +57,14 @@ public class BillService implements IBillService {
     @Override
     public boolean updateBill(Integer id) {
         return billDAO.updateBill(id);
+    }
+
+    @Override
+    public List<BillModel> findAll(Integer accountId) {
+        List<BillModel> result = billDAO.findAllByAccountId(accountId);
+        /*result.forEach(bill->{
+            bill.setBillDetailModels(billDetailDAO.findAllByBillId(bill.getId()));
+        });*/
+        return result;
     }
 }

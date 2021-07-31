@@ -1,6 +1,8 @@
 package com.newfashion.controller.web;
 
 import com.newfashion.model.AccountModel;
+import com.newfashion.model.BillModel;
+import com.newfashion.service.IBillService;
 import com.newfashion.utilities.SessionUtil;
 
 import javax.inject.Inject;
@@ -19,6 +21,9 @@ public class AccountController extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	@Inject
 	private GenericController genericController;
+	@Inject
+	private IBillService billService;
+
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,6 +31,9 @@ public class AccountController extends HttpServlet{
 		if(accountModel == null){
 			resp.sendRedirect(req.getContextPath() + "/login");
 		}
+		BillModel billModel = new BillModel();
+		billModel.setListResult(billService.findAll(accountModel.getId()));
+		req.setAttribute("billModel",billModel);
 		req.setAttribute("accountModel",accountModel);
 		RequestDispatcher rd = req.getRequestDispatcher("/views/web/account.jsp");
 		genericController.displayGeneric(req,"HOME");

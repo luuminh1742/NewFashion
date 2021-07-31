@@ -26,4 +26,15 @@ public class BillAPI extends HttpServlet {
         BillModel model = HttpUtil.of(req.getReader()).toModel(BillModel.class);
         mapper.writeValue(resp.getOutputStream(), billService.addBill(model));
     }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        Integer billId = Integer.parseInt(req.getParameter("bill-id"));
+        BillModel model = billService.findById(billId);
+        model.setDate(model.getCreatedDate().toString());
+        mapper.writeValue(resp.getOutputStream(), model);
+    }
 }

@@ -9,4 +9,5 @@ public interface IBillService {
     List<BillModel> findAll();
     Integer addBill(BillModel model);
     boolean updateBill(Integer id);
+    List<BillModel> findAll(Integer accountId);
 }
