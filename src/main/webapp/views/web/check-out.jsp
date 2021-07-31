@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglib.jsp"%>
+<c:url var="APICheckOut" value="/api/bill"/>
+<c:url var="UrlShop" value="/shop?category-id=0&page=1"/>
 <html>
 <head>
     <title>Check out</title>
@@ -13,7 +15,7 @@
             <div class="col-lg-12">
                 <div class="breadcrumb-text product-more">
                     <a href='<c:url value="/home"/> '><i class="fa fa-home"></i> Home</a>
-                    <a href='<c:url value="/shop?page=1"/> '>Shop</a>
+                    <a href='<c:url value="shop?category-id=0&page=1"/> '>Shop</a>
                     <span>Check Out</span>
                 </div>
             </div>
@@ -32,35 +34,35 @@
                     <h4>Biiling Details</h4>
                     <div class="row">
                         <div class="col-lg-12">
-                            <label for="fullname">Recipient's name <span>*</span></label>
-                            <input type="text" id="fullname" value="${USERMODEL.fullName}">
+                            <label for="receiverName">Recipient's name <span>*</span></label>
+                            <input type="text" id="receiverName" value="${USERMODEL.fullName}">
                         </div>
                         <div class="col-lg-12">
-                            <label for="address">Receiving address <span>*</span></label>
-                            <input type="text" id="address" value="${USERMODEL.address}">
+                            <label for="receiverAddress">Receiving address <span>*</span></label>
+                            <input type="text" id="receiverAddress" value="${USERMODEL.address}">
                         </div>
                         <div class="col-lg-6">
                             <label for="email">Email Address<span>*</span></label>
                             <input type="text" id="email" value="${USERMODEL.email}">
                         </div>
                         <div class="col-lg-6">
-                            <label for="phone">Phone<span>*</span></label>
-                            <input type="text" id="phone" value="${USERMODEL.phone}">
+                            <label for="receiverPhone">Phone<span>*</span></label>
+                            <input type="text" id="receiverPhone" value="${USERMODEL.phone}">
                         </div>
                         <div class="col-lg-12">
                             <div class="d-flex">
-                                <input type="checkbox" style="width: 20px;height: 20px;margin-right: 10px" id="payment-online">
+                                <input type="radio" name="pay" style="width: 20px;height: 20px;margin-right: 10px" id="payment-online">
                                 <label for="payment-online">Online payment</label>
                             </div>
                             <div class="d-flex">
-                                <input type="checkbox" style="width: 20px;height: 20px;margin-right: 10px" id="payment-on-delivery">
+                                <input type="radio" name="pay" style="width: 20px;height: 20px;margin-right: 10px" id="payment-on-delivery" checked>
                                 <label for="payment-on-delivery">Payment on delivery</label>
                             </div>
 
                         </div>
                         <div class="col-lg-12">
                             <div class="order-btn">
-                                <button type="submit" class="site-btn place-btn">Place Order</button>
+                                <button type="submit" class="site-btn place-btn" onclick="clickCheckOut()">Place Order</button>
                             </div>
                         </div>
                     </div>
@@ -96,41 +98,11 @@
 
                                 </tbody>
                             </table>
-                            <%--<ul class="order-table">
-                                <li>Product <span>Total</span></li>
-                                <c:forEach var="cart" items="${cartModel.listResult}">
-                                    <li class="fw-normal">${cart.product.name} x ${cart.quantity} <span>&nbsp VND</span><span class="money">${cart.product.price * cart.quantity}</span></li>
-                                </c:forEach>
-                                &lt;%&ndash;<li class="fw-normal">Combination x 1 <span>$60.00</span></li>
-                                <li class="fw-normal">Combination x 1 <span>$60.00</span></li>
-                                <li class="fw-normal">Combination x 1 <span>$120.00</span></li>
-                                <li class="fw-normal">Subtotal <span>$240.00</span></li>
-                                <li class="total-price">Total <span>$240.00</span></li>&ndash;%&gt;
-                            </ul>--%>
                             <div>
                                 <p>Subtotal: <span class="money">${cartModel.totalMoney}</span> VND</p>
                                 <p>Ship: <span class="money">30000</span> VND</p>
                                 <p>Total pay: <span class="money">${cartModel.totalMoney + 30000}</span> VND</p>
                             </div>
-                            <%--<div class="payment-check">
-                                <div class="pc-item">
-                                    <label for="pc-check">
-                                        Cheque Payment
-                                        <input type="checkbox" id="pc-check">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <div class="pc-item">
-                                    <label for="pc-paypal">
-                                        Paypal
-                                        <input type="checkbox" id="pc-paypal">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                            </div>--%>
-                           <%-- <div class="order-btn">
-                                <button type="submit" class="site-btn place-btn">Place Order</button>
-                            </div>--%>
                         </div>
                     </div>
                 </div>
@@ -139,5 +111,38 @@
     </div>
 </section>
 <!-- Shopping Cart Section End -->
+<script>
+    const clickCheckOut = ()=>{
+        event.preventDefault();
+        let data = {};
+        data["carts"] = [];
+        <c:forEach var="_cart" items="${cartModel.listResult}">
+            data["carts"].push({
+                productId:${_cart.productId},
+                accountId:${_cart.accountId},
+                quantity:${_cart.quantity}
+            });
+        </c:forEach>
+        data["receiverName"] = $('#receiverName').val();
+        data["receiverAddress"] = $('#receiverAddress').val();
+        data["receiverPhone"] = $('#receiverPhone').val();
+        data["accountId"] = ${USERMODEL.id};
+       // return ;
+        $.ajax({
+            url: '${APICheckOut}',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: (result) => {
+                alert("SUCCESS");
+                window.location = '${UrlShop}';
+            },
+            error: (error) => {
+                alert("ERROR!");
+            }
+        });
+    }
+</script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.newfashion.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,4 +16,5 @@ public class BillModel extends AbstractModel<BillModel> {
 	private String payType;
 	private boolean status;
 	private Integer accountId;
+	private List<CartModel> carts;
 }

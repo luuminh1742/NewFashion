@@ -36,3 +36,16 @@
 .active-category{
     color: #e7ab3c !important;
 }
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link{
+    color: #fff;
+    background-color: #252525 !important;
+}
+.my-menu{
+    color: black;
+}
+.my-menu:hover{
+    color: #fff !important;
+    background-color: #e7ab3c !important;
+}

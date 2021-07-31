@@ -32,6 +32,5 @@ public class AccountMapper implements RowMapper{
         }catch (SQLException ex){
             return null;
         }
-
     }
 }

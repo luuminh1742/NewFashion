@@ -25,7 +25,7 @@
                     <div class="dropdown">
                         <a class="login-panel" href='#'><i class="fa fa-user-circle"></i> ${USERMODEL.fullName}</a>
                         <div class="dropdown-content">
-                            <a href="#"><i class="fa fa-user"></i> Account</a>
+                            <a href='<c:url value="/account"/> '><i class="fa fa-user"></i> Account</a>
                             <a href='<c:url value="/logout"/> '><i class="fa fa-sign-out"></i> Logout</a>
                         </div>
                     </div>
