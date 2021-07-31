@@ -103,8 +103,8 @@
             </div>
             <nav class="nav-menu mobile-menu">
                 <ul>
-                    <li class="${checkMenuHeader == "HOME"?"active":""}"><a href='<c:url value="/home"/>'>Home</a></li>
-                    <li class="${checkMenuHeader == "SHOP"?"active":""}">
+                    <li class='${checkMenuHeader == "HOME"?"active":""}'><a href='<c:url value="/home"/>'>Home</a></li>
+                    <li class='${checkMenuHeader == "SHOP"?"active":""}'>
                         <a href='<c:url value="/shop?category-id=0&page=1"/>'>Shop</a></li>
                     <li><a href="#">Contact</a></li>
                     <li><a href="#">consultants</a></li>

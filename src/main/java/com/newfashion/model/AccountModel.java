@@ -8,6 +8,7 @@ import lombok.Setter;
 public class AccountModel extends AbstractModel<AccountModel> {
 	private String username;
 	private String password;
+	private String newPassword;
 	private String fullName;
 	private String address;
 	private String email;
