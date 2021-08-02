@@ -25,20 +25,15 @@
 <div id="page-inner">
     <div class="panel panel-default">
         <ul class="nav nav-tabs">
-            <li class=" ${type == "new" ?"active":""}">
+            <li class=' ${type == "new" ?"active":""}'>
                 <a href='<c:url value="/admin/bill?type=new&page=1"/>'
                 >New orders</a>
             </li>
-            <li class="${type == "old" ?"active":""}">
+            <li class='${type == "old" ?"active":""}'>
                 <a href='<c:url value="/admin/bill?type=old&page=1"/>'
                 >Order confirmed</a>
             </li>
         </ul>
-        <%--<div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active in" id="new-orders" role="tabpanel" aria-labelledby="new-orders-tab">...</div>
-            &lt;%&ndash;<div class="tab-pane fade" id="order-confirmed" role="tabpanel" aria-labelledby="order-confirmed-tab">...</div>&ndash;%&gt;
-
-        </div>--%>
         <div class="tab-content p-2">
             <div class="">
                 <c:if test="${billModel.listResult.size() == 0}">

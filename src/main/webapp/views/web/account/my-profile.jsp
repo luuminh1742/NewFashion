@@ -58,7 +58,6 @@
 <div class="row">
     <div class="col-md-12">
         <form>
-
             <div class="form-group row">
                 <label for="username" class="label col-md-2">Old password</label>
                 <input class="form-control col-md-10" type="password"

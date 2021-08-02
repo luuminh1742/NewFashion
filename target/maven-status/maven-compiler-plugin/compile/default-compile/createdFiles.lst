@@ -9,6 +9,7 @@ com\newfashion\dao\IBillDetailDAO.class
 com\newfashion\dao\IProductDAO.class
 com\newfashion\controller\admin\ProductController.class
 com\newfashion\controller\web\CartController.class
+com\newfashion\controller\admin\AccountController.class
 com\newfashion\api\BillAPI.class
 com\newfashion\mapper\AccountMapper.class
 com\newfashion\utilities\SessionUtil.class

@@ -19,9 +19,11 @@
                 <a class='${menuSidebar == "bill" ?"active-menu":""}' href='<c:url value = "/admin/bill?type=new&page=1"/>'><i class="fa fa-money"></i> Order</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-user"></i> Account</a>
+                <a class='${menuSidebar == "account" ?"active-menu":""}' href='<c:url value = "/admin/account"/>'><i class="fa fa-user"></i> Account</a>
             </li>
-            
+            <li>
+                <a href='<c:url value = "/home"/>' target="_blank"><i class="fa fa-rocket"></i> View website</a>
+            </li>
         </ul>
 
     </div>

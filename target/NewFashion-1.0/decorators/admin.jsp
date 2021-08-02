@@ -36,6 +36,8 @@
 	<script src="<c:url value='/assets/paging/jquery.twbsPagination.js'/>"></script>
 	<link rel="stylesheet"
 		  href='<c:url value="/assets/admin/css/my-style-bill.css"/>'>
+
+	<script src="<c:url value='/assets/web/js/simple.money.format.js'/>"></script>
 </head>
 <body>
 	<div id="wrapper">
@@ -67,7 +69,9 @@
 
 	<!-- Custom Js -->
 	<script src='<c:url value="/assets/admin/js/custom-scripts.js"/>'></script>
-
+	<script>
+		$('.money').simpleMoneyFormat();
+	</script>
 
 	<!-- Chart Js -->
 <%--	<script type="text/javascript"
