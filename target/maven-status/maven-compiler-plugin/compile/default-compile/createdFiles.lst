@@ -44,6 +44,7 @@ com\newfashion\service\IProductCategoryService.class
 com\newfashion\paging\Sorter.class
 com\newfashion\utilities\HttpUtil.class
 com\newfashion\mapper\ProductCategoryMapper.class
+com\newfashion\api\OrderAPI.class
 com\newfashion\paging\Pageble.class
 com\newfashion\model\ProductCategoryModel.class
 com\newfashion\service\IAccountService.class
@@ -55,6 +56,7 @@ com\newfashion\service\IProductService.class
 com\newfashion\controller\web\LoginController.class
 com\newfashion\dao\ICartDAO.class
 com\newfashion\service\impl\ProductImageService.class
+com\newfashion\controller\admin\BillController.class
 com\newfashion\service\IBillService.class
 com\newfashion\dao\impl\AbstractDAO.class
 com\newfashion\dao\impl\ProductImageDAO.class

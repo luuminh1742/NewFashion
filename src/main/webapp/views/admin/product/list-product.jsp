@@ -6,14 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Quản lý sản phẩm | Admin New Fashion</title>
+<title>Product Management | Admin New Fashion</title>
 </head>
 <body>
 	<div class="header">
-		<h1 class="page-header">Quản lý sản phẩm</h1>
+		<h1 class="page-header">Product Management</h1>
 		<ol class="breadcrumb">
-			<li><a href="#">Trang chủ</a></li>
-			<li><a href="active">Quản lý sản phẩm</a></li>
+			<li><a href="#">Home</a></li>
+			<li><a href="active">Product Management</a></li>
 		</ol>
 
 	</div>
@@ -26,7 +26,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<div style="display: flex; justify-content: space-between;">
-							<h3>Danh sách sản phẩm</h3>
+							<h3>List of products</h3>
 							<a class="btn btn-primary btn-lg"
 							href='<c:url value="/admin/product?type=edit"/>'>
 								<i class="fa fa-plus-circle" class="text-light" style="size: 25px"></i>
@@ -143,7 +143,7 @@
 
 
 function clickDeleteProduct(id){
-	var confirmDelete = confirm("Xác nhận xóa sản phẩm này?");
+	let confirmDelete = confirm("Confirm deletion of this product?");
 	if (confirmDelete) {
 		var data = {};
 		data['id'] = id;
@@ -154,11 +154,11 @@ function clickDeleteProduct(id){
 			data: JSON.stringify(data),
 			dataType: 'json',
 			success: function (result) {
-				alert("Xóa thành công");
+				alert("Delete successfully.");
 				location.reload();
 			},
 			error: function (error) {
-				alert("Xóa thất bại");
+				alert("Delete failed.");
 			}
 		});
 	}

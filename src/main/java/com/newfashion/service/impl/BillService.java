@@ -6,6 +6,7 @@ import com.newfashion.model.BillDetailModel;
 import com.newfashion.model.BillModel;
 import com.newfashion.model.CartModel;
 import com.newfashion.model.ProductModel;
+import com.newfashion.paging.Pageble;
 import com.newfashion.service.IBillService;
 import com.newfashion.service.ICartService;
 import com.newfashion.service.IProductService;
@@ -66,5 +67,30 @@ public class BillService implements IBillService {
             bill.setBillDetailModels(billDetailDAO.findAllByBillId(bill.getId()));
         });*/
         return result;
+    }
+
+    @Override
+    public List<BillModel> findAll(boolean status) {
+        return billDAO.findAll(status);
+    }
+
+    @Override
+    public List<BillModel> findAll(Pageble pageble, boolean status) {
+        return billDAO.findAll(pageble, status);
+    }
+
+    @Override
+    public int getTotalItem(boolean status) {
+        return billDAO.getTotalItem(status);
+    }
+
+    @Override
+    public boolean getOrders(Integer id) {
+        return billDAO.getOrders(id);
+    }
+
+    @Override
+    public boolean deleteOrders(Integer id) {
+        return billDAO.deleteOrders(id);
     }
 }

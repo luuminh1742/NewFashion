@@ -2,7 +2,10 @@ package com.newfashion.dao.impl;
 
 import com.newfashion.dao.IBillDAO;
 import com.newfashion.mapper.BillMapper;
+import com.newfashion.mapper.ProductMapper;
 import com.newfashion.model.BillModel;
+import com.newfashion.paging.Pageble;
+import org.apache.commons.lang.StringUtils;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -43,6 +46,42 @@ public class BillDAO extends AbstractDAO<BillModel> implements IBillDAO {
     @Override
     public boolean updateBill(Integer id) {
         String sql = "update bill set status = 1 where id = ?";
+        return update(sql,id);
+    }
+
+    @Override
+    public List<BillModel> findAll(boolean status) {
+        String sql = "select * from bill where status = ? order by created_date desc";
+        return query(sql,new BillMapper(),status);
+    }
+
+    @Override
+    public List<BillModel> findAll(Pageble pageble, boolean status) {
+        StringBuilder  sql = new StringBuilder("select * from bill where status = ? ");
+        if (pageble.getSorter() != null && StringUtils.isNotBlank(pageble.getSorter().getSortName()) && StringUtils.isNotBlank(pageble.getSorter().getSortBy())) {
+            sql.append(" ORDER BY "+pageble.getSorter().getSortName()+" "+pageble.getSorter().getSortBy()+"");
+        }
+        if (pageble.getOffset() != null && pageble.getLimit() != null) {
+            sql.append(" LIMIT "+pageble.getOffset()+", "+pageble.getLimit()+"");
+        }
+        return query(sql.toString(), new BillMapper(),status);
+    }
+
+    @Override
+    public int getTotalItem(boolean status) {
+        String sql = "select count(*) from bill where status = ?";
+        return count(sql,status);
+    }
+
+    @Override
+    public boolean getOrders(Integer id) {
+        String sql = "update bill set status = 1 where id = ?";
+        return update(sql,id);
+    }
+
+    @Override
+    public boolean deleteOrders(Integer id) {
+        String sql = "delete from bill where id = ?";
         return update(sql,id);
     }
 }

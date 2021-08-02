@@ -1,0 +1,12 @@
+.my-border-danger{
+    border-left: 5px solid #d20000;
+}
+.my-border-success{
+    border-left: 5px solid #00d202;
+}
+.my-item-bill{
+    cursor: pointer;
+    margin: 15px 0px;
+    padding: 10px ;
+    background-color: #fcf8e3;
+}

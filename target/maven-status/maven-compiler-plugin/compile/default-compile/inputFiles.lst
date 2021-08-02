@@ -7,6 +7,7 @@ D:\Sources\JavaWeb\MyWeb\NewFashion\NewFashion\src\main\java\com\newfashion\serv
 D:\Sources\JavaWeb\MyWeb\NewFashion\NewFashion\src\main\java\com\newfashion\dao\IBillDAO.java
 D:\Sources\JavaWeb\MyWeb\NewFashion\NewFashion\src\main\java\com\newfashion\utilities\SessionUtil.java
 D:\Sources\JavaWeb\MyWeb\NewFashion\NewFashion\src\main\java\com\newfashion\controller\admin\ProductCategoryController.java
+D:\Sources\JavaWeb\MyWeb\NewFashion\NewFashion\src\main\java\com\newfashion\controller\admin\BillController.java
 D:\Sources\JavaWeb\MyWeb\NewFashion\NewFashion\src\main\java\com\newfashion\controller\web\HomeController.java
 D:\Sources\JavaWeb\MyWeb\NewFashion\NewFashion\src\main\java\com\newfashion\dao\IBillDetailDAO.java
 D:\Sources\JavaWeb\MyWeb\NewFashion\NewFashion\src\main\java\com\newfashion\service\impl\CartService.java
@@ -55,6 +56,7 @@ D:\Sources\JavaWeb\MyWeb\NewFashion\NewFashion\src\main\java\com\newfashion\serv
 D:\Sources\JavaWeb\MyWeb\NewFashion\NewFashion\src\main\java\com\newfashion\mapper\RowMapper.java
 D:\Sources\JavaWeb\MyWeb\NewFashion\NewFashion\src\main\java\com\newfashion\model\BillModel.java
 D:\Sources\JavaWeb\MyWeb\NewFashion\NewFashion\src\main\java\com\newfashion\service\IAccountService.java
+D:\Sources\JavaWeb\MyWeb\NewFashion\NewFashion\src\main\java\com\newfashion\api\OrderAPI.java
 D:\Sources\JavaWeb\MyWeb\NewFashion\NewFashion\src\main\java\com\newfashion\mapper\ProductImageMapper.java
 D:\Sources\JavaWeb\MyWeb\NewFashion\NewFashion\src\main\java\com\newfashion\paging\PageRequest.java
 D:\Sources\JavaWeb\MyWeb\NewFashion\NewFashion\src\main\java\com\newfashion\api\ProductCategoryAPI.java

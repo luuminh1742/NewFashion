@@ -6,14 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Quản lý danh mục | Admin New Fashion</title>
+<title>Manage categories | Admin New Fashion</title>
 </head>
 <body>
 	<div class="header">
-		<h1 class="page-header">Quản lý danh mục</h1>
+		<h1 class="page-header">Manage categories</h1>
 		<ol class="breadcrumb">
-			<li><a href="#">Trang chủ</a></li>
-			<li><a class="active" href="#">Quản lý danh mục</a></li>
+			<li><a href="#">Home</a></li>
+			<li><a class="active" href="#">Manage categories</a></li>
 		</ol>
 
 	</div>
@@ -26,7 +26,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<div style="display: flex; justify-content: space-between;">
-							<h3>Danh mục sản phẩm</h3>
+							<h3>Product portfolio</h3>
 							<button class="btn btn-primary btn-lg" data-toggle="modal"
 								data-target="#myModal" onclick="clickAddNewProductCategory()">
 								<i class="fa fa-plus-circle" class="text-light"

@@ -26,10 +26,7 @@
         <div class="row">
             <div class="col-md-3">
                 <h3 class="mb-3 font-weight-bold" style="color: #e7ab3c">${USERMODEL.fullName}</h3>
-<<<<<<< HEAD
                 <hr>
-=======
->>>>>>> 6b054c004c431176b57f4a91b55537c327ad4ce5
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
                     <a class="nav-link my-menu active" data-toggle="pill" href="#v-pills-profile" role="tab">
@@ -38,15 +35,8 @@
                     <a class="nav-link my-menu" data-toggle="pill" href="#v-pills-messages" role="tab">
                         <i class="fa fa-bell-o"></i> Notifications
                     </a>
-<<<<<<< HEAD
                     <a class="nav-link my-menu" data-toggle="pill" href="#v-pills-purchases" role="tab">
                         <i class="fa fa-credit-card"></i> My Purchases
-=======
-                    <a class="nav-link my-menu" data-toggle="pill" href="#v-pills-settings" role="tab">
-                        <i class="fa fa-cog"></i> My Settings</a>
-                    <a class="nav-link my-menu" data-toggle="pill" href="#v-pills-payment" role="tab">
-                        <i class="fa fa-credit-card"></i> Payments
->>>>>>> 6b054c004c431176b57f4a91b55537c327ad4ce5
                     </a>
                 </div>
             </div>
@@ -61,7 +51,6 @@
                     </div>
                     <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
                          aria-labelledby="v-pills-messages-tab">
-<<<<<<< HEAD
                         <div class="alert alert-info" role="alert">
                             <p style="
                                     font-weight: bold;
@@ -76,17 +65,6 @@
                     <div class="tab-pane fade" id="v-pills-purchases" role="tabpanel"
                          aria-labelledby="v-pills-purchases-tab">
                         <%@include file="/views/web/account/my-purchases.jsp"%>
-=======
-                        <p>Notifications</p>
-                    </div>
-                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
-                         aria-labelledby="v-pills-settings-tab">
-                        <p>Setting</p>
-                    </div>
-                    <div class="tab-pane fade" id="v-pills-payment" role="tabpanel"
-                         aria-labelledby="v-pills-settings-tab">
-                        <p>Payment</p>
->>>>>>> 6b054c004c431176b57f4a91b55537c327ad4ce5
                     </div>
                 </div>
             </div>

@@ -34,6 +34,8 @@
 	src='<c:url value="/assets/admin/plugins/ckeditor/ckeditor.js"/>'></script>
 	<!--  phân trang  -->
 	<script src="<c:url value='/assets/paging/jquery.twbsPagination.js'/>"></script>
+	<link rel="stylesheet"
+		  href='<c:url value="/assets/admin/css/my-style-bill.css"/>'>
 </head>
 <body>
 	<div id="wrapper">

@@ -1,8 +1,5 @@
 package com.newfashion.controller.web;
 
-import com.newfashion.model.ProductCategoryModel;
-import com.newfashion.service.IProductCategoryService;
-
 import java.io.IOException;
 
 import javax.inject.Inject;
