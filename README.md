@@ -1,10 +1,13 @@
 # NewFashion
 > Website thời trang bán quần áo.
 # Sử dụng công nghệ 
-- JSP - Servlet
+  ### * JSP - Servlet 
+    Project sử dụng:
+      - Mô hình MVC 
+      - Restful API
 ![image](https://emulationsofttech.files.wordpress.com/2018/01/1java.jpg)
 
-- Hệ quản trị MySQL
+  ### * Hệ quản trị MySQL
 ![image](https://techvccloud.mediacdn.vn/2020/9/17/mysql-1-1600340047538868003500-crop-160034079526453914971.png)
 
 # Các chức năng của website
