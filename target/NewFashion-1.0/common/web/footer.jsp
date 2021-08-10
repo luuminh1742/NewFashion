@@ -9,12 +9,16 @@
             <div class="col-lg-3">
                 <div class="footer-left">
                     <div class="footer-logo">
-                        <a href="#"><img src="img/footer-logo.png" alt=""></a>
+                        <a href="#"><%--<img src="img/footer-logo.png" alt="">--%>
+                            <p style="font-size: 22px;
+                                        font-weight: bold;
+                                        color: #fff;">NEW FASHION</p>
+                        </a>
                     </div>
                     <ul>
-                        <li>Address: 60-49 Road 11378 New York</li>
-                        <li>Phone: +65 11.188.888</li>
-                        <li>Email: hello.colorlib@gmail.com</li>
+                        <li>Address: Hanoi University of Industry</li>
+                        <li>Phone: 0988.876.545</li>
+                        <li>Email: hello.world@gmail.com</li>
                     </ul>
                     <div class="footer-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
@@ -31,7 +35,7 @@
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Checkout</a></li>
                         <li><a href="#">Contact</a></li>
-                        <li><a href="#">Serivius</a></li>
+                        <li><a href="#">Service</a></li>
                     </ul>
                 </div>
             </div>

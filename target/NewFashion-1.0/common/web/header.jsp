@@ -45,7 +45,10 @@
                 <div class="col-lg-2 col-md-2">
                     <div class="logo">
                         <a href='<c:url value="/home"/> '>
-                            <img src='<c:url value="/assets/web/img/logo.png"/>' alt="">
+                            <%--<img src='<c:url value="/assets/web/img/logo.png"/>' alt="">--%>
+                            <p style="font-size: 22px;
+                                        font-weight: bold;
+                                        color: #000;">NEW FASHION</p>
                         </a>
                     </div>
                 </div>

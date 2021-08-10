@@ -10,7 +10,14 @@
 </head>
 <body>
 	<div class="header">
-		<h1 class="page-header">Product Management</h1>
+		<div class="page-header" style="display: flex;justify-content: space-between;">
+			<h1>Product Management</h1>
+			<div class="form-outline">
+				<input type="search" id="form1" class="form-control" placeholder="Search product"
+					   aria-label="Search" style="margin: 5px 0px;"/>
+			</div>
+		</div>
+
 		<ol class="breadcrumb">
 			<li><a href="#">Home</a></li>
 			<li><a href="active">Product Management</a></li>
