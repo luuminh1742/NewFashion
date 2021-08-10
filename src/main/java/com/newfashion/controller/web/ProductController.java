@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/product")
 public class ProductController extends HttpServlet {
@@ -28,7 +29,9 @@ public class ProductController extends HttpServlet {
         int id = Integer.parseInt(productId);
 
         ProductModel productModel = productService.findById(id);
+        List<ProductModel> newProduct = productService.findNewProduct(4);
         req.setAttribute("productModel",productModel);
+        req.setAttribute("newProduct",newProduct);
         RequestDispatcher rd = req.getRequestDispatcher("/views/web/product.jsp");
         genericController.displayGeneric(req,"SHOP");
         rd.forward(req,resp);

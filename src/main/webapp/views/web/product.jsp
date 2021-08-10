@@ -1,6 +1,5 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="/common/taglib.jsp"%>
+<%@include file="/common/taglib.jsp" %>
 <c:url var="APICart" value="/api/cart"/>
 <html>
 <head>
@@ -33,7 +32,9 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="product-pic-zoom">
-                            <img class="product-big-img" src='<c:url value="/fileupload/images/${productModel.productImages.get(0).name}"/> ' alt="">
+                            <img class="product-big-img"
+                                 src='<c:url value="/fileupload/images/${productModel.productImages.get(0).name}"/> '
+                                 alt="">
                             <div class="zoom-icon">
                                 <i class="fa fa-search-plus"></i>
                             </div>
@@ -41,8 +42,10 @@
                         <div class="product-thumbs">
                             <div class="product-thumbs-track ps-slider owl-carousel">
                                 <c:forEach var="image" items="${productModel.productImages}">
-                                    <div class="pt active" data-imgbigurl='<c:url value="/fileupload/images/${image.name}"/> '>
-                                        <img src='<c:url value="/fileupload/images/${image.name}"/>' style="height: 220px;width: 100%;" alt=""></div>
+                                    <div class="pt active"
+                                         data-imgbigurl='<c:url value="/fileupload/images/${image.name}"/> '>
+                                        <img src='<c:url value="/fileupload/images/${image.name}"/>'
+                                             style="height: 220px;width: 100%;" alt=""></div>
                                 </c:forEach>
 
                             </div>
@@ -64,7 +67,8 @@
                                 <span>(5)</span>
                             </div>
                             <div style="padding:20px 0px">
-                                <h4 style="color: #e7ab3c; font-weight: 700;"><span class="money">${productModel.price}</span> VND</h4>
+                                <h4 style="color: #e7ab3c; font-weight: 700;"><span
+                                        class="money">${productModel.price}</span> VND</h4>
                             </div>
                             <%--<div class="pd-desc">
                                 <h4><p class="money"></p> VND</h4>
@@ -94,14 +98,15 @@
                                     <input id="quantity" type="text" value="1">
                                 </div>
                                 <c:if test="${not empty USERMODEL}">
-                                    <a href="" class="primary-btn pd-cart" onclick="clickAddCart(${productModel.id},${USERMODEL.id})">Add To Cart</a>
+                                    <a href="" class="primary-btn pd-cart"
+                                       onclick="clickAddCart(${productModel.id},${USERMODEL.id})">Add To Cart</a>
                                     <script>
-                                        const clickAddCart = (product_id,account_id)=>{
+                                        const clickAddCart = (product_id, account_id) => {
                                             let data = {};
                                             data["productId"] = product_id;
                                             data["accountId"] = account_id;
                                             data["quantity"] = Number($('#quantity').val());
-                                            if(data["quantity"]<=0){
+                                            if (data["quantity"] <= 0) {
                                                 alert("Invalid product quantity!");
                                                 return;
                                             }
@@ -125,7 +130,7 @@
                                 <c:if test="${empty USERMODEL}">
                                     <a href="" class="primary-btn pd-cart" onclick="clickAddCart()">Add To Cart</a>
                                     <script>
-                                        const clickAddCart = ()=>{
+                                        const clickAddCart = () => {
                                             alert('You are not logged in!');
                                         }
 
@@ -155,9 +160,6 @@
                                 <a class="active" data-toggle="tab" href="#tab-1" role="tab">DESCRIPTION</a>
                             </li>
                             <li>
-                                <a data-toggle="tab" href="#tab-2" role="tab">SPECIFICATIONS</a>
-                            </li>
-                            <li>
                                 <a data-toggle="tab" href="#tab-3" role="tab">Customer Reviews (02)</a>
                             </li>
                         </ul>
@@ -167,90 +169,19 @@
                             <div class="tab-pane fade-in active" id="tab-1" role="tabpanel">
                                 <div class="product-content">
                                     <div class="row">
-                                        <div class="col-lg-7">
-                                            <h5>Introduction</h5>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                                ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                aliquip ex ea commodo consequat. Duis aute irure dolor in </p>
-                                            <h5>Features</h5>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-                                                ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                                aliquip ex ea commodo consequat. Duis aute irure dolor in </p>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <img src='<c:url value="/assets/web/img/product-single/tab-desc.jpg"/>' alt="">
-                                        </div>
+                                        ${productModel.productDetail}
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="tab-2" role="tabpanel">
-                                <div class="specification-table">
-                                    <table>
-                                        <tr>
-                                            <td class="p-catagory">Customer Rating</td>
-                                            <td>
-                                                <div class="pd-rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <span>(5)</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Price</td>
-                                            <td>
-                                                <div class="p-price">$495.00</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Add To Cart</td>
-                                            <td>
-                                                <div class="cart-add">+ add to cart</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Availability</td>
-                                            <td>
-                                                <div class="p-stock">22 in stock</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Weight</td>
-                                            <td>
-                                                <div class="p-weight">1,3kg</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Size</td>
-                                            <td>
-                                                <div class="p-size">Xxl</div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Color</td>
-                                            <td><span class="cs-color"></span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="p-catagory">Sku</td>
-                                            <td>
-                                                <div class="p-code">00012</div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
+
                             <div class="tab-pane fade" id="tab-3" role="tabpanel">
                                 <div class="customer-review-option">
                                     <h4>2 Comments</h4>
                                     <div class="comment-option">
                                         <div class="co-item">
                                             <div class="avatar-pic">
-                                                <img src='<c:url value="/assets/web/img/product-single/avatar-1.png"/>' alt="">
+                                                <img src='<c:url value="/assets/web/img/product-single/avatar-1.png"/>'
+                                                     alt="">
                                             </div>
                                             <div class="avatar-text">
                                                 <div class="at-rating">
@@ -266,7 +197,8 @@
                                         </div>
                                         <div class="co-item">
                                             <div class="avatar-pic">
-                                                <img src='<c:url value="/assets/web/img/product-single/avatar-2.png"/>' alt="">
+                                                <img src='<c:url value="/assets/web/img/product-single/avatar-2.png"/>'
+                                                     alt="">
                                             </div>
                                             <div class="avatar-text">
                                                 <div class="at-rating">
@@ -330,104 +262,32 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3 col-sm-6">
-                <div class="product-item">
-                    <div class="pi-pic">
-                        <img src='<c:url value="/assets/web/img/products/women-1.jpg"/>' alt="">
-                        <div class="sale">Sale</div>
-                        <div class="icon">
-                            <i class="icon_heart_alt"></i>
+            <c:forEach var="item" items="${newProduct}">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="product-item">
+                        <div class="pi-pic">
+                            <img src='<c:url value="/fileupload/images/${item.image}"/>' alt="" height="280">
+                            <div class="icon">
+                                <i class="icon_heart_alt"></i>
+                            </div>
+                            <ul>
+                                <li class="w-icon active"><a href="#"><i class="fa fa-cart-plus"></i></a></li>
+                                <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
+                            </ul>
                         </div>
-                        <ul>
-                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="pi-text">
-                        <div class="catagory-name">Coat</div>
-                        <a href="#">
-                            <h5>Pure Pineapple</h5>
-                        </a>
-                        <div class="product-price">
-                            $14.00
-                            <span>$35.00</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="product-item">
-                    <div class="pi-pic">
-                        <img src='<c:url value="/assets/web/img/products/women-2.jpg"/>' alt="">
-                        <div class="icon">
-                            <i class="icon_heart_alt"></i>
-                        </div>
-                        <ul>
-                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="pi-text">
-                        <div class="catagory-name">Shoes</div>
-                        <a href="#">
-                            <h5>Guangzhou sweater</h5>
-                        </a>
-                        <div class="product-price">
-                            $13.00
+                        <div class="pi-text">
+                                <%--<div class="catagory-name">Shoes</div>--%>
+                            <a class="pb-3" href='<c:url value="/product?id=${item.id}"/>'>
+                                <h5 class="product-name">${item.name}</h5>
+                            </a>
+                            <div style="color: #e7ab3c;font-size: 20px;font-weight: 700;width: 100%;position: absolute;bottom: 0px;left: 0px">
+                                <span class="money">${item.price}</span> VNĐ
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="product-item">
-                    <div class="pi-pic">
-                        <img src='<c:url value="/assets/web/img/products/women-3.jpg"/>' alt="">
-                        <div class="icon">
-                            <i class="icon_heart_alt"></i>
-                        </div>
-                        <ul>
-                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="pi-text">
-                        <div class="catagory-name">Towel</div>
-                        <a href="#">
-                            <h5>Pure Pineapple</h5>
-                        </a>
-                        <div class="product-price">
-                            $34.00
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="product-item">
-                    <div class="pi-pic">
-                        <img src='<c:url value="/assets/web/img/products/women-4.jpg"/>' alt="">
-                        <div class="icon">
-                            <i class="icon_heart_alt"></i>
-                        </div>
-                        <ul>
-                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="pi-text">
-                        <div class="catagory-name">Towel</div>
-                        <a href="#">
-                            <h5>Converse Shoes</h5>
-                        </a>
-                        <div class="product-price">
-                            $34.00
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </c:forEach>
         </div>
     </div>
 </div>

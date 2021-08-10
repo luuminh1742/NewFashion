@@ -89,6 +89,12 @@ public class ProductDAO extends AbstractDAO<ProductModel> implements IProductDAO
 	}
 
 	@Override
+	public List<ProductModel> findNewProduct(int productNumber) {
+		String sql = "select * from product order by created_date desc limit ?";
+		return query(sql, new ProductMapper(),productNumber);
+	}
+
+	@Override
 	public void saveTimeChange(Timestamp modifiedDate, String modifiedBy,int id) {
 		String sql = "update product set modified_date = ?, modified_by = ? where id = ?";
 		update(sql,modifiedDate,modifiedBy,id);
