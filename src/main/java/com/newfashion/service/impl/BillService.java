@@ -80,8 +80,18 @@ public class BillService implements IBillService {
     }
 
     @Override
+    public List<BillModel> findAll(Pageble pageble, int checkStatus) {
+        return billDAO.findAll(pageble, checkStatus);
+    }
+
+    @Override
     public int getTotalItem(boolean status) {
         return billDAO.getTotalItem(status);
+    }
+
+    @Override
+    public int getTotalItem(int checkStatus) {
+        return billDAO.getTotalItem(checkStatus);
     }
 
     @Override

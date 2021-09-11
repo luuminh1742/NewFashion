@@ -18,6 +18,7 @@ public class BillMapper implements RowMapper<BillModel> {
             model.setCreatedDate(resultSet.getTimestamp("created_date"));
             model.setPayType(resultSet.getString("pay_type"));
             model.setStatus(resultSet.getBoolean("status"));
+            model.setCheckStatus(resultSet.getInt("check_status"));
             return model;
         } catch (SQLException ex) {
             return null;

@@ -36,11 +36,11 @@ public class BillDAO extends AbstractDAO<BillModel> implements IBillDAO {
         StringBuilder sql = new StringBuilder();
         sql.append("insert into bill ");
         sql.append("(account_id,receiver_name,receiver_address,");
-        sql.append("receiver_phone,created_date,pay_type,status) ");
-        sql.append(" values (?,?,?,?,?,?,?)");
+        sql.append("receiver_phone,created_date,pay_type,status,check_status) ");
+        sql.append(" values (?,?,?,?,?,?,?,?)");
         return insert(sql.toString(),model.getAccountId(),model.getReceiverName(),
                 model.getReceiverAddress(),model.getReceiverPhone(),
-                new Timestamp(System.currentTimeMillis()),"",0);
+                new Timestamp(System.currentTimeMillis()),"",0,0);
     }
 
     @Override
@@ -58,7 +58,8 @@ public class BillDAO extends AbstractDAO<BillModel> implements IBillDAO {
     @Override
     public List<BillModel> findAll(Pageble pageble, boolean status) {
         StringBuilder  sql = new StringBuilder("select * from bill where status = ? ");
-        if (pageble.getSorter() != null && StringUtils.isNotBlank(pageble.getSorter().getSortName()) && StringUtils.isNotBlank(pageble.getSorter().getSortBy())) {
+        if (pageble.getSorter() != null && StringUtils.isNotBlank(pageble.getSorter().getSortName())
+                && StringUtils.isNotBlank(pageble.getSorter().getSortBy())) {
             sql.append(" ORDER BY "+pageble.getSorter().getSortName()+" "+pageble.getSorter().getSortBy()+"");
         }
         if (pageble.getOffset() != null && pageble.getLimit() != null) {
@@ -68,20 +69,39 @@ public class BillDAO extends AbstractDAO<BillModel> implements IBillDAO {
     }
 
     @Override
+    public List<BillModel> findAll(Pageble pageble, int checkStatus) {
+        StringBuilder  sql = new StringBuilder("select * from bill where check_status = ? ");
+        if (pageble.getSorter() != null && StringUtils.isNotBlank(pageble.getSorter().getSortName())
+                && StringUtils.isNotBlank(pageble.getSorter().getSortBy())) {
+            sql.append(" ORDER BY "+pageble.getSorter().getSortName()+" "+pageble.getSorter().getSortBy()+"");
+        }
+        if (pageble.getOffset() != null && pageble.getLimit() != null) {
+            sql.append(" LIMIT "+pageble.getOffset()+", "+pageble.getLimit()+"");
+        }
+        return query(sql.toString(), new BillMapper(),checkStatus);
+    }
+
+    @Override
     public int getTotalItem(boolean status) {
         String sql = "select count(*) from bill where status = ?";
         return count(sql,status);
     }
 
     @Override
+    public int getTotalItem(int checkStatus) {
+        String sql = "select count(*) from bill where check_status = ?";
+        return count(sql,checkStatus);
+    }
+
+    @Override
     public boolean getOrders(Integer id) {
-        String sql = "update bill set status = 1 where id = ?";
+        String sql = "update bill set check_status = 1 where id = ?";
         return update(sql,id);
     }
 
     @Override
     public boolean deleteOrders(Integer id) {
-        String sql = "delete from bill where id = ?";
+        String sql = "update bill set check_status = 2 where id = ?";
         return update(sql,id);
     }
 }

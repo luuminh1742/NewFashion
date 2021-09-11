@@ -185,6 +185,14 @@
                 </div>
                 <div class="product-list">
                     <div class="row">
+                        <c:if test="${productModel.listResult.size() == 0}">
+                            <div style="flex:1">
+                                <img src='<c:url value="/assets/web/img/product_not_found.png"/>'
+                                    style="display: block; margin-left: auto; margin-right: auto;"
+                                >
+                            </div>
+
+                        </c:if>
                         <c:forEach var="product" items="${productModel.listResult}">
                             <div class="col-lg-4 col-sm-6 mb-4">
                                 <div class="product-item border border-light p-2 h-100">

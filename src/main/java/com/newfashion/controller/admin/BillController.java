@@ -34,13 +34,17 @@ public class BillController extends HttpServlet {
         Pageble pageble = new PageRequest(page, billModel.getMaxPageItem(),
                 new Sorter(billModel.getSortName(), billModel.getSortBy()));
         if(type.equals("new")){
-            billModel.setTotalItem(billService.getTotalItem(false));
+            billModel.setTotalItem(billService.getTotalItem(0));
             billModel.setTotalPage((int)Math.ceil((double)billModel.getTotalItem()/billModel.getMaxPageItem()));
-            billModel.setListResult(billService.findAll(pageble,false));
+            billModel.setListResult(billService.findAll(pageble,0));
+        }else if(type.equals("old")){
+            billModel.setTotalItem(billService.getTotalItem(1));
+            billModel.setTotalPage((int)Math.ceil((double)billModel.getTotalItem()/billModel.getMaxPageItem()));
+            billModel.setListResult(billService.findAll(pageble,1));
         }else{
-            billModel.setTotalItem(billService.getTotalItem(true));
+            billModel.setTotalItem(billService.getTotalItem(2));
             billModel.setTotalPage((int)Math.ceil((double)billModel.getTotalItem()/billModel.getMaxPageItem()));
-            billModel.setListResult(billService.findAll(pageble,true));
+            billModel.setListResult(billService.findAll(pageble,2));
         }
         req.setAttribute("type",type);
         req.setAttribute("billModel",billModel);

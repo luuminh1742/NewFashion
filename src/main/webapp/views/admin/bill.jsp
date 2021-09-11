@@ -33,6 +33,10 @@
                 <a href='<c:url value="/admin/bill?type=old&page=1"/>'
                 >Order confirmed</a>
             </li>
+            <li class='${type == "cancelled" ?"active":""}'>
+                <a href='<c:url value="/admin/bill?type=cancelled&page=1"/>'
+                >Cancelled</a>
+            </li>
         </ul>
         <div class="tab-content p-2">
             <div class="">
@@ -45,23 +49,42 @@
                 </c:if>
                 <c:forEach var="bill" items="${billModel.listResult}">
                     <div class="my-item-bill
-                            ${bill.status == false ?"my-border-danger":"my-border-success"}"
+                            ${bill.checkStatus == 0 ?"my-border-warning": bill.checkStatus == 1?"my-border-success":"my-border-danger"}"
                          data-toggle="modal" data-target="#exampleModalCenter"
                          onclick="clickViewBill(${bill.id})">
                         <p>Code Orders : #${bill.id}</p>
                         <p>Created date : ${bill.createdDate}</p>
-                        <c:if test="${bill.status == false}">
+                        <c:choose>
+                            <c:when test = "${bill.checkStatus == 0}">
+                                <p>Status : Wait for confirmation.</p>
+                                <input value="Get orders" type="button" class="btn btn-success"
+                                       onclick="clickGetOrders(${bill.id})"
+                                >
+                                <input value="Cancel orders" type="button" class="btn btn-danger"
+                                       onclick="clickDeleteOrders(${bill.id})"
+                                >
+                            </c:when>
+
+                            <c:when test = "${bill.checkStatus == 1}">
+                                <p>Status : Order confirmed.</p>
+                            </c:when>
+
+                            <c:otherwise>
+                                <p>Status : Order canceled.</p>
+                            </c:otherwise>
+                        </c:choose>
+                        <%--<c:if test="${bill.status == false}">
                             <p>Status : The store has not received orders.</p>
                             <input value="Get orders" type="button" class="btn btn-success"
                                 onclick="clickGetOrders(${bill.id})"
                             >
-                            <input value="Delete orders" type="button" class="btn btn-danger"
+                            <input value="Cancel orders" type="button" class="btn btn-danger"
                                    onclick="clickDeleteOrders(${bill.id})"
                             >
                         </c:if>
                         <c:if test="${bill.status == true}">
                             <p>Status : The store has received the order.</p>
-                        </c:if>
+                        </c:if>--%>
 
                     </div>
                 </c:forEach>
@@ -164,8 +187,9 @@
                 $('#receiverAddress').text(out['receiverAddress']);
                 $('#receiverPhone').text(out['receiverPhone']);
                 $('#createdDate').text(out['date']);
-                $('#status').text(out['status']?"The store has received the order."
-                    :"store has not received orders.");
+                let checkStatus = out['checkStatus'];
+                $('#status').text(checkStatus === 0 ?"New orders."
+                    :checkStatus === 1? "Order confirmed.":"Order canceled");
                 $('#order-detail').html("");
                 let total = 0;
                 out["billDetails"].map(item=>{
@@ -218,7 +242,7 @@
     }
 
     const clickDeleteOrders = (id)=>{
-        let confirmDelete = confirm("Confirm delete this order?");
+        let confirmDelete = confirm("Confirm cancel this order?");
         if (confirmDelete) {
             let data = {};
             data["id"] = id;
@@ -229,11 +253,11 @@
                 data: JSON.stringify(data),
                 dataType: 'json',
                 success: (result) => {
-                    alert("Deleted order successfully.!");
+                    alert("Cancel order successfully.!");
                     location.reload();
                 },
                 error: (error) => {
-                    alert("Delete failed order.!");
+                    alert("Cancel failed order.!");
                 }
             });
         }

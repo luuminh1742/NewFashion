@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglib.jsp" %>
 <c:url var="APIGetBill" value="/api/bill"/>
-
+<c:url value="/api/order" var="APIOrder"/>
 <h4 class="font-weight-bold">My Purchases</h4>
 <br>
 <div class="row">
     <c:forEach var="bill" items="${billModel.listResult}">
-        <div class="col-md-12 p-3 bg-light border-left mb-3
+        <%--<div class="col-md-12 p-3 bg-light border-left mb-3
            ${bill.status == false ?"border-danger":"border-success"}" style="cursor: pointer;"
              data-toggle="modal" data-target="#exampleModalCenter"
              onclick="clickViewBill(${bill.id})">
@@ -18,6 +18,26 @@
             <c:if test="${bill.status == true}">
                 <p>Status : The store has received the order.</p>
             </c:if>
+        </div>--%>
+        <div class="col-md-12 p-3 bg-light border-left mb-3
+           ${bill.checkStatus == 0 ?"border-warning": bill.checkStatus == 1?"border-success":"border-danger"}" style="cursor: pointer;"
+             data-toggle="modal" data-target="#exampleModalCenter"
+             onclick="clickViewBill(${bill.id})">
+            <p>Code Orders : #${bill.id}</p>
+            <p>Created date : ${bill.createdDate}</p>
+            <c:choose>
+                <c:when test = "${bill.checkStatus == 0}">
+                    <p>Status : Wait for confirmation.</p>
+                </c:when>
+
+                <c:when test = "${bill.checkStatus == 1}">
+                    <p>Status : Order confirmed.</p>
+                </c:when>
+
+                <c:otherwise>
+                    <p>Status : Order canceled.</p>
+                </c:otherwise>
+            </c:choose>
         </div>
     </c:forEach>
 </div>
@@ -80,6 +100,8 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Print</button>
+                <button type="button" class="btn btn-danger" id="bntCancelOrder">Cancel Order</button>
+                <input hidden id="idBill" value="" type="number">
             </div>
         </div>
     </div>
@@ -96,9 +118,16 @@
                     $('#receiverAddress').text(out['receiverAddress']);
                     $('#receiverPhone').text(out['receiverPhone']);
                     $('#createdDate').text(out['date']);
-                    $('#status').text(out['status']?"The store has received the order."
-                        :"store has not received orders.");
+                    let checkStatus = out['checkStatus'];
+                    $('#status').text(checkStatus === 0 ?"Wait for confirmation."
+                        :checkStatus === 1? "Order confirmed.":"Order canceled");
                     $('#order-detail').html("");
+                    if(checkStatus === 0){
+                        $('#bntCancelOrder').show();
+                        $('#idBill').val(out['id']);
+                    }else{
+                        $('#bntCancelOrder').hide();
+                    }
                     let total = 0;
                     out["billDetails"].map(item=>{
                         let totalmoney = item.currentlyPrice * item.quantity;
@@ -128,5 +157,32 @@
             })
             .catch(err => console.log(err));
 
+    }
+
+    $('#bntCancelOrder').click(()=>{
+        let idBill = $('#idBill').val();
+        clickDeleteOrders(idBill);
+    })
+
+    const clickDeleteOrders = (id)=>{
+        let confirmDelete = confirm("Confirm cancel this order?");
+        if (confirmDelete) {
+            let data = {};
+            data["id"] = id;
+            $.ajax({
+                url: '${APIOrder}',
+                type: 'DELETE',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                dataType: 'json',
+                success: (result) => {
+                    alert("Cancel order successfully.!");
+                    location.reload();
+                },
+                error: (error) => {
+                    alert("Cancel failed order.!");
+                }
+            });
+        }
     }
 </script>

@@ -26,62 +26,72 @@
 <section class="shopping-cart spad">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="cart-table">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Image</th>
-                            <th class="p-name">Product Name</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                            <th><i class="ti-close"></i></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:set var = "subtotal" scope = "session" value = "${0}"/>
-                        <c:forEach varStatus="loop" var="cart" items="${cartModel.listResult}">
-                            <tr id="data_cart_${cart.productId}">
-                                <td class="cart-pic first-row"><img width="170" height="170" src='<c:url value="/fileupload/images/${cart.product.image}"/> ' alt=""></td>
-                                <td class="cart-title first-row">
-                                    <h5>${cart.product.name}</h5>
-                                </td>
-                                <td class="p-price first-row"><span class="money">${cart.product.price}</span> VND</td>
-                                <td class="qua-col first-row">
-                                    <div class="quantity">
-                                        <input type="number" class="form-control"
-                                               value="${cart.quantity}" onclick="changeQuantity(this,${cart.accountId},${cart.productId})"
-                                        style="width: 75px; text-align: center;">
-                                    </div>
-                                </td>
-                                <td class="total-price first-row" id="total_price_${cart.productId}"><span class="money">${cart.product.price * cart.quantity}</span> VND</td>
-                                <td class="close-td first-row"><i class="ti-close" onclick="clickDeleteCartItem(${cart.accountId},${cart.productId})"></i></td>
+            <c:if test="${cartModel.listResult.size() == 0}">
+                <div style="flex:1">
+                    <img src='<c:url value="/assets/web/img/cart-empty.jpg"/> '
+                         style="display: block; margin-left: auto; margin-right: auto;"
+                    >
+                </div>
+            </c:if>
+            <c:if test="${cartModel.listResult.size() != 0}">
+                <div class="col-lg-12">
+                    <div class="cart-table">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th class="p-name">Product Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th><i class="ti-close"></i></th>
                             </tr>
-                            <input hidden value="${cart.product.price}" id="price_${cart.productId}">
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="cart-buttons">
-                            <a href='<c:url value="/shop"/> ' class="primary-btn continue-shop">Continue shopping</a>
+                            </thead>
+                            <tbody>
+                            <c:set var = "subtotal" scope = "session" value = "${0}"/>
+                            <c:forEach varStatus="loop" var="cart" items="${cartModel.listResult}">
+                                <tr id="data_cart_${cart.productId}">
+                                    <td class="cart-pic first-row"><img width="170" height="170" src='<c:url value="/fileupload/images/${cart.product.image}"/> ' alt=""></td>
+                                    <td class="cart-title first-row">
+                                        <h5>${cart.product.name}</h5>
+                                    </td>
+                                    <td class="p-price first-row"><span class="money">${cart.product.price}</span> VND</td>
+                                    <td class="qua-col first-row">
+                                        <div class="quantity">
+                                            <input type="number" class="form-control"
+                                                   value="${cart.quantity}" onclick="changeQuantity(this,${cart.accountId},${cart.productId})"
+                                                   style="width: 75px; text-align: center;">
+                                        </div>
+                                    </td>
+                                    <td class="total-price first-row" id="total_price_${cart.productId}"><span class="money">${cart.product.price * cart.quantity}</span> VND</td>
+                                    <td class="close-td first-row"><i class="ti-close" onclick="clickDeleteCartItem(${cart.accountId},${cart.productId})"></i></td>
+                                </tr>
+                                <input hidden value="${cart.product.price}" id="price_${cart.productId}">
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="cart-buttons">
+                                <a href='<c:url value="/shop?category-id=0&page=1"/> ' class="primary-btn continue-shop">Continue shopping</a>
 
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 offset-lg-4">
-                        <div class="proceed-checkout">
-                            <ul>
-                                <li class="subtotal">Subtotal <span>&nbsp VND</span> <span class="money">${cartModel.totalMoney}</span></li>
-                                <li class="subtotal">Ship <span>&nbsp VND</span> <span class="money">30000</span></li>
-                                <li class="cart-total">Total <span>&nbsp VND</span> <span class="money">${cartModel.totalMoney + 30000}</span> </li>
-                            </ul>
-                            <a href='<c:url value="/check-out"/> ' class="proceed-btn">PROCEED TO CHECK OUT</a>
+                        <div class="col-lg-4 offset-lg-4">
+                            <div class="proceed-checkout">
+                                <ul>
+                                    <li class="subtotal">Subtotal <span>&nbsp VND</span> <span class="money">${cartModel.totalMoney}</span></li>
+                                    <li class="subtotal">Ship <span>&nbsp VND</span> <span class="money">30000</span></li>
+                                    <li class="cart-total">Total <span>&nbsp VND</span> <span class="money">${cartModel.totalMoney + 30000}</span> </li>
+                                </ul>
+                                <a href='<c:url value="/check-out"/> ' class="proceed-btn">PROCEED TO CHECK OUT</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </c:if>
+
         </div>
     </div>
 </section>

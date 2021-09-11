@@ -13,7 +13,9 @@ public interface IBillService {
     List<BillModel> findAll(Integer accountId);
     List<BillModel> findAll(boolean status);
     List<BillModel> findAll(Pageble pageble, boolean status);
+    List<BillModel> findAll(Pageble pageble, int checkStatus);
     int getTotalItem(boolean status);
+    int getTotalItem(int checkStatus);
     boolean getOrders(Integer id);
     boolean deleteOrders(Integer id);
 }
