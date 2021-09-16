@@ -27,8 +27,8 @@ public class ProductAPI extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ObjectMapper mapper = new ObjectMapper();
-        req.setCharacterEncoding("UTF-8");
-        resp.setContentType("application/json");
+        req.setCharacterEncoding("UTF-8");// Su dung kieu du lieu Tieng Viet
+        resp.setContentType("application/json");// Dinh dang kieu du lieu server se tra ve
 
         ProductModel model = HttpUtil.of(req.getReader()).toModel(ProductModel.class);
         model = productService.save(model);

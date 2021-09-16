@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/shop")
 public class ShopController extends HttpServlet {
@@ -27,6 +28,7 @@ public class ShopController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        String search = req.getParameter("search");
         int page = Integer.parseInt(req.getParameter("page"));
         int categoryId =  Integer.parseInt(req.getParameter("category-id"));
         ProductModel productModel = new ProductModel();
@@ -36,6 +38,11 @@ public class ShopController extends HttpServlet {
         productModel.setSortName("created_date");
         Pageble pageble = new PageRequest(page, productModel.getMaxPageItem(),
                 new Sorter(productModel.getSortName(), productModel.getSortBy()));
+        if(search != null){
+            productModel.setTotalItem(productService.getTotalItem(search));
+            productModel.setTotalPage((int)Math.ceil((double)productModel.getTotalItem()/productModel.getMaxPageItem()));
+            productModel.setListResult(search(search,pageble));
+        } else
         if(categoryId!=0){
             productModel.setTotalItem(productService.getTotalItem(categoryId));
             productModel.setTotalPage((int)Math.ceil((double)productModel.getTotalItem()/productModel.getMaxPageItem()));
@@ -51,5 +58,9 @@ public class ShopController extends HttpServlet {
         RequestDispatcher rd = req.getRequestDispatcher("/views/web/shop.jsp");
         genericController.displayGeneric(req,"SHOP");
         rd.forward(req,resp);
+    }
+
+    private List<ProductModel> search (String text,Pageble pageble){
+        return productService.search(pageble,text);
     }
 }

@@ -17,4 +17,6 @@ public interface IProductDAO extends GenericDAO<ProductModel>{
 	int getTotalItem(Integer categoryId);
 	List<ProductModel> findAll(Pageble pageble,Integer categoryId);
 	List<ProductModel> findNewProduct(int productNumber);
+	List<ProductModel> search(Pageble pageble,String search);
+	int getTotalItem(String textSearch);
 }

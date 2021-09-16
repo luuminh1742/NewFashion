@@ -37,7 +37,7 @@
 							<a class="btn btn-primary btn-lg"
 							href='<c:url value="/admin/product?type=edit"/>'>
 								<i class="fa fa-plus-circle" class="text-light" style="size: 25px"></i>
-								Thêm sản phẩm
+								Add product
 							</a>
 						</div>
 

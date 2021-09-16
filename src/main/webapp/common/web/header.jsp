@@ -2,7 +2,6 @@
          pageEncoding="UTF-8" %>
 <%@include file="/common/taglib.jsp" %>
 
-
 <!-- Header Section Begin -->
 <header class="header-section">
     <div class="header-top">
@@ -57,8 +56,14 @@
                         <button type="button" class="category-btn">All Categories</button>
 
                         <div class="input-group">
-                            <input type="text" placeholder="Search product">
-                            <button type="button"><i class="ti-search"></i></button>
+                            <form action='<c:url value="/shop"/>' method="get">
+                                <input type="text" placeholder="Search product" name="search">
+                                <button type="submit"><i class="ti-search"></i></button>
+                                <input hidden name="category-id" value="0">
+                                <input hidden name="page" value="1">
+
+                            </form>
+
                         </div>
                     </div>
                 </div>

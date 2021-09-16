@@ -5,22 +5,22 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Quản lý sản phẩm | Admin New Fashion</title>
+    <title>Product Management | Admin New Fashion</title>
 
 </head>
 <body>
 <div class="header">
-    <h1 class="page-header">Quản lý sản phẩm</h1>
+    <h1 class="page-header">Product Management</h1>
     <ol class="breadcrumb">
-        <li><a href="#">Trang chủ</a></li>
-        <li><a href="#">Quản lý sản phẩm</a></li>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Product Management</a></li>
         <c:choose>
             <c:when test="${model.id != null}">
-                <li><a href="#">Chỉnh sửa sản phẩm</a></li>
+                <li><a href="#">Edit product</a></li>
             </c:when>
 
             <c:otherwise>
-                <li><a href="#">Thêm mới sản phẩm</a></li>
+                <li><a href="#">Add product</a></li>
             </c:otherwise>
         </c:choose>
 
@@ -43,14 +43,14 @@
                             </a>
                             <c:choose>
                                 <c:when test="${model.id != null}">
-                                    <h3>Chỉnh sửa sản phẩm</h3>
+                                    <h3>Edit porduct</h3>
                                 </c:when>
                                 <c:otherwise>
-                                    <h3>Thêm sản phẩm</h3>
+                                    <h3>Add product</h3>
                                 </c:otherwise>
                             </c:choose>
                         </div>
-                        <input type="button" class="btn btn-primary" value="Lưu sản phẩm"
+                        <input type="button" class="btn btn-primary" value="Save info"
                         onclick="clickSaveProduct()">
                     </div>
 
@@ -131,9 +131,9 @@
     			<div class="panel-heading">
     				<div style="display: flex;justify-content: space-between;">
                         <div style="display: flex;">
-                            <h3>Ảnh sản phẩm</h3>
+                            <h3>Product image</h3>
                         </div>
-                        <input type="button" class="btn btn-primary" value="Thêm ảnh" 
+                        <input type="button" class="btn btn-primary" value="Save"
                         data-toggle="modal" data-target="#uploadImageModal" 
                         onclick="openModal()"
                         <c:if test="${model.id == null}">disabled</c:if>

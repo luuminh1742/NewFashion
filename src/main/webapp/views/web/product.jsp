@@ -138,7 +138,7 @@
                                 </c:if>
 
                             </div>
-                            <ul class="pd-tags">
+                            <%--<ul class="pd-tags">
                                 <li><span>CATEGORIES</span>: More Accessories, Wallets & Cases</li>
                                 <li><span>TAGS</span>: Clothing, T-shirt, Woman</li>
                             </ul>
@@ -149,7 +149,7 @@
                                     <a href="#"><i class="ti-twitter-alt"></i></a>
                                     <a href="#"><i class="ti-linkedin"></i></a>
                                 </div>
-                            </div>
+                            </div>--%>
                         </div>
                     </div>
                 </div>
